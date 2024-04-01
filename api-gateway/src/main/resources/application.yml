@@ -1,0 +1,45 @@
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: never
+  #app:
+  #disable-default-exception-handling: false
+
+# Mapping of all services with their base paths
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: USER-SERVICE
+            #uri: https://user.the-capacity.com/
+            uri: lb://USER-SERVICE   #lb is use for load-balancing
+            predicates:
+              - Path=/users/**
+
+          - id: EMAIL-SERVICE
+            uri: lb://EMAIL-SERVICE
+            predicates:
+              - Path=/email/**
+
+
+# For Register with eureka server as a client
+eureka:
+  instance:
+   # ip-address: api.the-capacity.com
+   # hostname: api.the-capacity.com
+   # securePortEnabled: true
+    prefer-ip-address: true
+    #status-page-url: https://api.the-capacity.com/
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      #defaultZone: https://admin:irb1234@discovery.the-capacity.com/eureka
+      defaultZone: http://admin:irb1234@localhost:8761/eureka
+
+
