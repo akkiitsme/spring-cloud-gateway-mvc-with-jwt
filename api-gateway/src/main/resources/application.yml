@@ -39,7 +39,6 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      #defaultZone: https://admin:irb1234@discovery.the-capacity.com/eureka
       defaultZone: http://admin:irb1234@localhost:8761/eureka
 
 
