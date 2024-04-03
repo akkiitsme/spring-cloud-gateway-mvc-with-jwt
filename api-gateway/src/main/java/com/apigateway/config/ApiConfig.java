@@ -11,4 +11,9 @@ public class ApiConfig {
     public RestTemplate template(){
         return new RestTemplate();
     }
+
+    @Bean
+    public static BeanDefinitionRegistryPostProcessor beanPostProcessorRemover() {
+        return registry -> registry.removeBeanDefinition("lbRestClientPostProcessor");
+    }
 }
