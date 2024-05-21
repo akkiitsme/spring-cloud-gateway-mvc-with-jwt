@@ -20,6 +20,16 @@ spring:
             uri: lb://USER-SERVICE   #lb is use for load-balancing
             predicates:
               - Path=/users/**
+            metadata:
+              cors:
+                allowedOrigins: '*'
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                allowedHeaders: '*'
+                maxAge: 30
 
           - id: EMAIL-SERVICE
             uri: lb://EMAIL-SERVICE
